@@ -16,6 +16,18 @@ public OnPluginStart()
     HookEvent("player_death", Event_PlayerDeath, EventHookMode_Post);
     HookEvent("round_start",Event_RoundStart, EventHookMode_Post);
 }
+
+public Plugin myinfo =  
+{ 
+	name = "vip and zombie", 
+	author = "h", 
+	description = "i want be vipppp", 
+	version = "100K", 
+	url = "www.rssgo.co.kr" 
+}
+
+
+
 public void OnMapEnd()
 {
 	CreateTimer(0.3, ResetTimer);
