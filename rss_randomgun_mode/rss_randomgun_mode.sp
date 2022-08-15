@@ -35,7 +35,7 @@ public void OnPluginStart()
 
 public void OnMapEnd()
 {
-	CreateTimer(5.3, ResetTimer);
+	CreateTimer(0.3, ResetTimer);
 }
 
 
@@ -87,6 +87,10 @@ public void OnRoundEnding(Event hEvent, const char[] sEvent, bool bDontBroadcast
 {
 	ServerCommand("sm_rcon sm plugins load fastbuy");
 	ServerCommand("sm_rcon sm plugins load zzzfastbuy");
+	int iEntity = INVALID_ENT_REFERENCE;
+	while((iEntity = FindEntityByClassname(iEntity, "func_buyzone")) != INVALID_ENT_REFERENCE)
+    AcceptEntityInput(iEntity, "Enable");
+	ServerCommand("sm_rcon mp_buy_anywhere 1"); 
 	ServerCommand("sm_rcon zr_config_path_weapons configs/zr/weapons.txt");
 	ServerCommand("sm_rcon zr_config_reloadall");
 }
@@ -104,6 +108,12 @@ public Action StartTimer(Handle hTimer)
 {
 	ServerCommand("sm_rcon sm plugins unload fastbuy");
 	ServerCommand("sm_rcon sm plugins unload zzzfastbuy");
+
+	int iEntity = INVALID_ENT_REFERENCE;
+	while((iEntity = FindEntityByClassname(iEntity, "func_buyzone")) != INVALID_ENT_REFERENCE)
+    AcceptEntityInput(iEntity, "Disable");
+	ServerCommand("sm_rcon mp_buy_anywhere 0"); 
+
 	ServerCommand("sm_rcon zr_config_path_weapons configs/zr/maps/random_weapons.txt");
 	ServerCommand("sm_rcon zr_config_reloadall");
 
